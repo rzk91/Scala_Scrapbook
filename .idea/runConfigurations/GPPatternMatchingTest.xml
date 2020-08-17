@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="GPPatternMatchingTest" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="gptraining.PatternMatchingTest" />
+    <module name="Scala_Scrapbook" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="gptraining.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
