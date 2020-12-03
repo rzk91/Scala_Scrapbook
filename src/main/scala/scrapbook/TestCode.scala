@@ -5,11 +5,10 @@ import java.time.temporal.ChronoUnit
 import java.time.{Instant, ZoneId, ZoneOffset, ZonedDateTime}
 
 import fpinscala._
-import org.apache.commons.math3.util.FastMath
 
-import scala.collection.mutable
+import scala.annotation.tailrec
 import scala.reflect.ClassTag
-import scala.Ordering.Implicits._
+import scala.util.Try
 
 object TestCode {
 
@@ -385,7 +384,7 @@ object TestCode {
     //      case _ => println("no match")
     //    }
 
-    //    val c = RandomCaseClass(2, 4, 7, 9)
+    //    val c = CaseClass(2, 4, 7, 9)
     //    if (c.productIterator.exists(_.asInstanceOf[Double] % 2 == 0)) {
     //      println(true)
     //    }
@@ -412,7 +411,7 @@ object TestCode {
     //    c.foreach(s => writer.write(s"$s\n"))
     //    writer.close()
 
-    //    val v = Seq(RandomCaseClass(1, 2), RandomCaseClass(2, 4), RandomCaseClass(3, 6), RandomCaseClass(4, 8))
+    //    val v = Seq(CaseClass(1, 2), CaseClass(2, 4), CaseClass(3, 6), CaseClass(4, 8))
     //
     //    println(mean(v.map(_.v1)), stddev(v.map(_.v1)), variance(v.map(_.v1)))
 
@@ -438,25 +437,34 @@ object TestCode {
     //    println(y)
     //    println(y_.toScalaVector)
 
-    val l = List(1, 2, 3, 4)
+//    val s = Set("")
+//
+//    println(s.headOption.flatMap(_.headOption).map(_ => s))
 
-    val l2 = List(Iterable(1, 2, 3, 4), Iterable(6, 7, 8), None)
+    val x = List(15, 15, 15, 16, 16, 0, 0, 1, 1, 1, 2)
+//    val x = List(3, 3, 3, 3, 4, 4, 5, 5, 5, 6, 6)
+    val y = x.distinct
+    println(y)
 
-    println(l2.flatten {
-      case l: Iterable[Int] => l
-      case _ => None
-    })
+    val vs = Seq(1, 14, 16, 18, 3)
+//    val vs = List(1, 3, 5, 7, 8)
 
-    println(l.flatMap {
-      case l: Int if l < 3 => List(l)
-      case _ => None
-    })
-
+    vs.foreach { v =>
+      if (y.contains(v)) {
+        println(s"Skipping $v")
+      } else if (monotonicallyIncreasing(y)) {
+        println(s"$v, ${y.indexWhere(_ < v)}")
+      } else {
+        val y1 :: y2 = splitWith(y.reverse)(_ > _).takeWhile(_.nonEmpty)
+        println(y1, y2)
+      }
+    }
   }
 
-  private case class RandomCaseClass[T](v1: Int, v2: Double) {
-    def double: Double = v2
-  }
+  private case class CaseClass(v1: Double, v2: Double, v3: Double)
+
+  private def monotonicallyIncreasing[A](values: List[A])(implicit num: Numeric[A]): Boolean =
+    (values, values.drop(1)).zipped.forall(num.lteq)
 
   def split(x: List[Int], idx: Array[Int]): List[List[Int]] = {
     if (idx.nonEmpty) {
@@ -465,6 +473,18 @@ object TestCode {
     } else {
       List(x)
     }
+  }
+
+  def splitWith[A](list: List[A])(op: (A, A) => Boolean): List[List[A]] = {
+    @tailrec
+    def loop(list: List[A], prev: A, acc: List[List[A]]): List[List[A]] =
+      list match {
+        case Nil                  => acc
+        case h :: t if op(prev, h) => loop(t, h, (h :: acc.head) :: acc.tail)
+        case h :: t               => loop(t, h, List(h) :: acc)
+      }
+
+    loop(list, list.head, List(List.empty[A]))
   }
 
   def toPrettyString(s: String): String = s.split("[-_\\s]").withFilter(_.nonEmpty).map(_.capitalize).mkString(" ")
@@ -499,12 +519,15 @@ object TestCode {
     sdf.parse(timeAsString).getTime
   }
 
-  def findFirstDerivatives[T](x: Array[T])(implicit num: Numeric[T]): Array[T] = {
+  def findFirstDerivatives[T: ClassTag](x: Array[T])(implicit num: Numeric[T]): Array[T] = {
     val y = x.takeRight(x.length - 1)
     val dx = Array.ofDim[T](y.length)
     x.zip(y.zipWithIndex).foreach(v => dx(v._2._2) = num.minus(v._2._1, v._1))
     dx
   }
+
+  def firstDerivativeOf[T](x: List[T])(implicit num: Numeric[T]): List[T] =
+    (x, x.tail).zipped.map((x1, x2) => num.minus(x2, x1))
 
   def invertMap[A, B, C](nestedMap: Map[A, Map[B, C]]): Map[B, Map[A, C]] =
     nestedMap.foldLeft(Map.empty[B, Map[A, C]]) {
