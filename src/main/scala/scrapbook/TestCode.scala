@@ -75,7 +75,6 @@ object TestCode {
     //
     //    println(finalMap)
 
-
     //    val x = Array.range(5, 10 + 5 + 1)
     //    println(x.mkString(","))
     //
@@ -93,7 +92,6 @@ object TestCode {
     //    x.set(Calendar.DAY_OF_MONTH, x.getActualMaximum(Calendar.DAY_OF_MONTH) + 1)
     //
     //    println(s"New time: ${x.getTime}")
-
 
     //    val x = "120d, 06:47:42"
     //    val p = "ddd HH:mm:ss"
@@ -239,7 +237,6 @@ object TestCode {
     ////
     ////    println(list1.mkString("\n"))
 
-
     //    val sMap = Set(("feeder_pile_chng", Set("1010", "1020")), ("delivery_pile_chng", Set("1111", "3333")))
     //      .flatMap(e => e._2.map(m => (m, e._1)))
     //      .toMap
@@ -294,7 +291,6 @@ object TestCode {
     //
     //    val z1 = z.sortWith((l, h) => s(l) > s(h))
     //    println(z1)
-
 
     //    val b = new ListBuffer[List[Int]]
     //
@@ -441,24 +437,28 @@ object TestCode {
 //
 //    println(s.headOption.flatMap(_.headOption).map(_ => s))
 
-    val x = List(15, 15, 15, 16, 16, 0, 0, 1, 1, 1, 2)
-//    val x = List(3, 3, 3, 3, 4, 4, 5, 5, 5, 6, 6)
+//    val x = List(15, 15, 15, 16, 16, 0, 0, 1, 1, 1, 2)
+    val x = List(1, 1, 1, 2, 3, 4, 4, 4, 0, 1, 1, 1, 2, 2, 3)
     val y = x.distinct
-    println(y)
+
+    val z = List(1, 2, 3, 4, 0)
+
+    println(y, z)
+    println(z == y)
 
     val vs = Seq(1, 14, 16, 18, 3)
 //    val vs = List(1, 3, 5, 7, 8)
 
-    vs.foreach { v =>
-      if (y.contains(v)) {
-        println(s"Skipping $v")
-      } else if (monotonicallyIncreasing(y)) {
-        println(s"$v, ${y.indexWhere(_ < v)}")
-      } else {
-        val y1 :: y2 = splitWith(y.reverse)(_ > _).takeWhile(_.nonEmpty)
-        println(y1, y2)
-      }
-    }
+//    vs.foreach { v =>
+//      if (y.contains(v)) {
+//        println(s"Skipping $v")
+//      } else if (monotonicallyIncreasing(y)) {
+//        println(s"$v, ${y.indexWhere(_ < v)}")
+//      } else {
+//        val y1 :: y2 = splitWith(y.reverse)(_ > _).takeWhile(_.nonEmpty)
+//        println(y1, y2)
+//      }
+//    }
   }
 
   private case class CaseClass(v1: Double, v2: Double, v3: Double)
@@ -466,28 +466,28 @@ object TestCode {
   private def monotonicallyIncreasing[A](values: List[A])(implicit num: Numeric[A]): Boolean =
     (values, values.drop(1)).zipped.forall(num.lteq)
 
-  def split(x: List[Int], idx: Array[Int]): List[List[Int]] = {
+  def split(x: List[Int], idx: Array[Int]): List[List[Int]] =
     if (idx.nonEmpty) {
       val (h, t) = x.splitAt(idx.head)
       List(h) ++ split(t, findFirstDerivatives(idx))
     } else {
       List(x)
     }
-  }
 
   def splitWith[A](list: List[A])(op: (A, A) => Boolean): List[List[A]] = {
     @tailrec
     def loop(list: List[A], prev: A, acc: List[List[A]]): List[List[A]] =
       list match {
-        case Nil                  => acc
+        case Nil                   => acc
         case h :: t if op(prev, h) => loop(t, h, (h :: acc.head) :: acc.tail)
-        case h :: t               => loop(t, h, List(h) :: acc)
+        case h :: t                => loop(t, h, List(h) :: acc)
       }
 
     loop(list, list.head, List(List.empty[A]))
   }
 
-  def toPrettyString(s: String): String = s.split("[-_\\s]").withFilter(_.nonEmpty).map(_.capitalize).mkString(" ")
+  def toPrettyString(s: String): String =
+    s.split("[-_\\s]").withFilter(_.nonEmpty).map(_.capitalize).mkString(" ")
 
   def convertDateToTimestamp(input: String): Option[Long] =
     try {
