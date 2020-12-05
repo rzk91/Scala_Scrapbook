@@ -443,8 +443,7 @@ object TestCode {
 
     val z = List(1, 2, 3, 4, 0)
 
-    println(y, z)
-    println(z == y)
+    println(z.splitAt(0))
 
     val vs = Seq(1, 14, 16, 18, 3)
 //    val vs = List(1, 3, 5, 7, 8)

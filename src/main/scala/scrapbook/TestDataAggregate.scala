@@ -136,8 +136,8 @@ object TestDataAggregate {
       new DataAggregate(start, end, IndexedSeq(latest), IndexedSeq(TYPair(latest, acc)), op, n)
 
     def modifySequence[A](seq: IndexedSeq[A], v: A, at: Int, insert: Boolean): IndexedSeq[A] = {
-      val len = seq.length
-      (seq.take(at) :+ v) ++ seq.takeRight(len - at - (if (insert) 0 else 1))
+      val (front, back) = seq.splitAt(at)
+      (front :+ v) ++ { if (insert) back else back.tail }
     }
   }
 
