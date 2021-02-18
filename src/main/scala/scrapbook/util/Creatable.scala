@@ -1,4 +1,4 @@
-package scrapbook
+package scrapbook.util
 
 import java.lang.reflect.Constructor
 

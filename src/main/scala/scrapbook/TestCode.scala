@@ -7,6 +7,7 @@ import java.time.{Instant, ZoneId, ZoneOffset, ZonedDateTime}
 import fpinscala._
 
 import scala.annotation.tailrec
+import scala.io.StdIn.readInt
 import scala.reflect.ClassTag
 import scala.util.Try
 
@@ -438,14 +439,14 @@ object TestCode {
 //    println(s.headOption.flatMap(_.headOption).map(_ => s))
 
 //    val x = List(15, 15, 15, 16, 16, 0, 0, 1, 1, 1, 2)
-    val x = List(1, 1, 1, 2, 3, 4, 4, 4, 0, 1, 1, 1, 2, 2, 3)
-    val y = x.distinct
-
-    val z = List(1, 2, 3, 4, 0)
-
-    println(z.splitAt(0))
-
-    val vs = Seq(1, 14, 16, 18, 3)
+//    val x = List(1, 1, 1, 2, 3, 4, 4, 4, 0, 1, 1, 1, 2, 2, 3)
+//    val y = x.distinct
+//
+//    val z = List(1, 2, 3, 4, 0)
+//
+//    println(z.splitAt(0))
+//
+//    val vs = Seq(1, 14, 16, 18, 3)
 //    val vs = List(1, 3, 5, 7, 8)
 
 //    vs.foreach { v =>
@@ -458,6 +459,11 @@ object TestCode {
 //        println(y1, y2)
 //      }
 //    }
+
+    println("Enter a number: ")
+    val n = readInt()
+
+    (1 to n).foreach(_ => println("Hello world"))
   }
 
   private case class CaseClass(v1: Double, v2: Double, v3: Double)
