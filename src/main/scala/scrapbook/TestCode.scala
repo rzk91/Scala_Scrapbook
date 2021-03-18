@@ -460,10 +460,15 @@ object TestCode {
 //      }
 //    }
 
-    println("Enter a number: ")
-    val n = readInt()
+//    println("Enter a number: ")
+//    val n = readInt()
+//
+//    (1 to n).foreach(_ => println("Hello world"))
 
-    (1 to n).foreach(_ => println("Hello world"))
+    val squares = Map(1 -> 1, 2 -> 4, 3 -> 9, 4 -> 16)
+
+    println(Try(squares(5)).toOption)
+
   }
 
   private case class CaseClass(v1: Double, v2: Double, v3: Double)

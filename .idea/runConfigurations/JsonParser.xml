@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="JsonParser" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="scrapbook.JsonParser" />
+    <module name="Scala_Scrapbook" />
+    <option name="PROGRAM_PARAMETERS" value="C:\Users\werm007\Documents\Work\IAF\SQL\bns03blob_flat" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="scrapbook.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
