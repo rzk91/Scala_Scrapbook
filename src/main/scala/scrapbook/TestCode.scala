@@ -2,14 +2,18 @@ package scrapbook
 
 import java.text.SimpleDateFormat
 import java.time.temporal.ChronoUnit
-import java.time.{Instant, ZoneId, ZoneOffset, ZonedDateTime}
-
+import java.time.{Instant, LocalDateTime, ZoneId, ZoneOffset, ZonedDateTime}
 import fpinscala._
 
+import java.time.format.DateTimeFormatter
 import scala.annotation.tailrec
+import scala.collection.mutable
 import scala.io.StdIn.readInt
 import scala.reflect.ClassTag
-import scala.util.Try
+import scala.util.{Success, Try}
+import scala.collection.JavaConverters._
+import scala.util.control.NonFatal
+import scala.util.matching.Regex
 
 object TestCode {
 
@@ -465,10 +469,75 @@ object TestCode {
 //
 //    (1 to n).foreach(_ => println("Hello world"))
 
-    val squares = Map(1 -> 1, 2 -> 4, 3 -> 9, 4 -> 16)
+//    val squares = Map(1 -> 1, 2 -> 4, 3 -> 9, 4 -> 16)
+//
+//    println(Try(squares(5)).toOption)
 
-    println(Try(squares(5)).toOption)
+//    val m: mutable.HashMap[String, Int] = mutable.HashMap("a" -> 1, "b" -> 2, "c" -> 3, "d" -> 4)
+//
+//    m.withFilter(_._2 % 2 == 0).foreach { e =>
+//      val k = e._1
+//      val v = e._2
+//      println(v)
+//      m.remove(k)
+//    }
+//
+//    println(m)
 
+//    val m: Map[Int, String] = Map(1 -> "2", 2 -> "4", 3 -> "6", 4 -> "==", 5 -> "!=")
+//
+//    println(RandomEnum.values)
+//
+////    println(RandomEnum.withName(m(4)))
+//
+//    println(m(4))
+
+//    val r = scala.util.Random
+//
+//    val l = (1 to 10).map(r.nextInt).toList
+//
+//    println(timeIt(l.distinct).time)
+//    println(timeIt(l.toSet).time)
+
+    //
+    //    val s: String = "2021-04-28T16:43:20+01:00"
+    //
+    //    val sTry = Try {
+    //      if (s.matches("^\\d+$")) {
+    //        s.toLong
+    //      } else {
+    //        (
+    //          Instant
+    //            .from(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX").parse(s))
+    //            .atZone(ZoneId.of("Europe/Berlin"))
+    //            .toEpochSecond * 1000L,
+    //          LocalDateTime
+    //            .parse(s, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX"))
+    //            .atZone(ZoneId.of("Europe/Berlin"))
+    //            .toEpochSecond * 1000L
+    //        )
+    //      }
+    //    }.toOption
+
+//    val m1 = Map(1 -> 2)
+//    val m2 = Map(2 -> 4)
+//    val m3 = Map(3 -> 6)
+//    val m4 = Map(4 -> 8)
+//
+//    val m = m1 ++ m2 ++ m3 ++ m4
+//
+//    val int1 = m.get(3)
+//    val int2 = m.get(5)
+//
+//    println(for {
+//      i <- int1
+//      j <- int2
+//    } yield math.min(i, j))
+//
+//    println((int1 ++ int2).reduceLeftOption(math.min))
+
+    val s = "\"Something\""
+    println(s.replaceAll("\"", ""))
   }
 
   private case class CaseClass(v1: Double, v2: Double, v3: Double)

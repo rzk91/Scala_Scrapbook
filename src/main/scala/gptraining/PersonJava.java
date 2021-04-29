@@ -26,11 +26,11 @@ public class PersonJava {
         this.age = age;
     }
 
-    @Override
-    public String toString() {
-        return "PersonJava{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "PersonJava{" +
+//                "name='" + name + '\'' +
+//                ", age=" + age +
+//                '}';
+//    }
 }

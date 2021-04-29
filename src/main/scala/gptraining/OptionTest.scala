@@ -8,18 +8,20 @@ object OptionTest {
     val emptyList = List.empty[Int]
     val numList = List.range(1, 10)
 
-//    if (mean(emptyList).isDefined) println("Mean exists") else println("Empty list")
+    println(mean(numList).map(_ * 2))
 
-    println(mean(numList))
+    println(if (mean(numList).isDefined) "good" else "bad")
+
+    println(mean(emptyList).getOrElse(0))
+
+    println(mean(numList) match {
+      case Some(v) => v * 2
+      case None    => "..."
+    })
+
   }
 
-  private def mean(l: List[Int]): Any = if (l.isEmpty) "Empty list" else l.sum/l.length.toDouble
-
-  private def mean_1(l: List[Int]): Double = l.sum/l.length.toDouble
-
-  private def meanOutput(x: Option[Double]): String = x match {
-    case Some(value) => value.toString
-    case None => "Empty sequence"
-  }
+  private def mean(l: List[Int]): Option[Double] =
+    if (l.lengthCompare(0) == 0) None else Some(l.sum / l.length.toDouble)
 
 }

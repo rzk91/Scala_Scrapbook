@@ -8,7 +8,7 @@ import scala.collection.immutable.ListMap
 object JsonParser extends LazyLogging {
 
   private val valueOrder: List[String] =
-    List("id", "label", "value", "unit", "tooltip", "onlineUpdatable", "range", "type", "list")
+    List("id", "label", "value", "unit", "tooltip", "required", "onlineUpdatable", "range", "type", "list")
 
   private val keyOrder1: List[String] =
     List(
