@@ -1,7 +1,9 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="JsonParser" type="Application" factoryName="Application">
+    <option name="ALTERNATIVE_JRE_PATH" value="11" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="scrapbook.JsonParser" />
-    <module name="Scala_Scrapbook" />
+    <module name="scala_scrapbook" />
     <option name="PROGRAM_PARAMETERS" value="C:\Users\werm007\Documents\Work\IAF\SQL\bns03blob_flat" />
     <extension name="coverage">
       <pattern>

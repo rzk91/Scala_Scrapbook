@@ -536,11 +536,57 @@ object TestCode {
 //
 //    println((int1 ++ int2).reduceLeftOption(math.min))
 
-    val s = "\"Something\""
-    println(s.replaceAll("\"", ""))
+//    val s = "/d/ZySgsTDGz/threshold-monitor?" +
+//      "&from=1587377598152" +
+//      "&to=1604266649527" +
+//      "&var-influxdb=InfluxDB" +
+//      "&var-botinstance_id=1234" +
+//      "&var-device_id=test" +
+//      "&var-selector=Temperature" +
+//      "&var-upper_thresholds=30,33,35,40" +
+//      "&var-timezone=UTC" +
+//      "&theme=light"
+//
+//    println(
+//      s.split('&')
+//        .tail
+//        .withFilter(s => List("theme", "var-influxdb").forall(!s.contains(_)))
+//        .map(_.split('=').toList)
+//        .collect {
+//          case head :: next :: Nil => head -> next
+//        }
+//        .toMap
+//    )
+
+    val m = Map(1 -> 2, 2 -> 4, 3 -> 6, 4 -> 7)
+    val l = List(CaseClass(1, 2, 3), CaseClass(2, 3, 4), CaseClass(4, 5, 6))
+
+//    println(m.updated(4, 8))
+
+    println(l.head.sort(true))
+
   }
 
-  private case class CaseClass(v1: Double, v2: Double, v3: Double)
+  case class CaseClass(v1: Double, v2: Double, v3: Double) {
+
+    def sort(ascending: Boolean): CaseClass =
+      ((if (ascending) toList.sorted else toList.sorted.reverse): @unchecked) match {
+        case v1 :: v2 :: v3 :: Nil => new CaseClass(v1, v2, v3)
+      }
+    def toList: List[Double] = List(v1, v2, v3)
+  }
+
+  object CaseClass {
+    private val numValues: Int = 3
+    def apply(v1: Double, v2: Double, v3: Double): CaseClass = CaseClass(List(v1, v2, v3))
+
+    def apply(values: List[Double]): CaseClass = {
+      println("Inside the list-based apply function")
+      (values.take(numValues): @unchecked) match {
+        case v1 :: v2 :: v3 :: Nil => new CaseClass(v1, v2, v3)
+      }
+    }
+  }
 
   private def monotonicallyIncreasing[A](values: List[A])(implicit num: Numeric[A]): Boolean =
     (values, values.drop(1)).zipped.forall(num.lteq)
