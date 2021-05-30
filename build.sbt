@@ -1,4 +1,4 @@
-name := "Scala_Scrapbook"
+name := "Scrapbook_Scala"
 
 version := "0.1"
 
@@ -24,7 +24,7 @@ val normalDependencies = Seq(
 )
 
 val testDependencies = Seq(
-  "org.scalatest"          %% "scalatest" % "3.0.5"  % "test",
+  "org.scalatest"          %% "scalatest" % "3.2.9"  % "test",
   "org.scalamock"          %% "scalamock" % "4.1.0"  % "test",
   "com.github.tomakehurst" % "wiremock"   % "2.20.0" % "test"
 )

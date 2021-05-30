@@ -3,7 +3,7 @@
     <option name="ALTERNATIVE_JRE_PATH" value="11" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="fpinscala.codesnippets.StreamTest" />
-    <module name="scala_scrapbook" />
+    <module name="Scrapbook_Scala" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="fpinscala.codesnippets.*" />

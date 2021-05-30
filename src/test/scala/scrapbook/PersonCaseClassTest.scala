@@ -1,4 +1,12 @@
 package scrapbook
 
-// FixMe: Scalatest is not loaded in external libraries
-class PersonCaseClassTest // extends FlatSpec {}
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.BeforeAndAfter
+
+class PersonCaseClassTest extends AnyFlatSpec with BeforeAndAfter with Matchers {
+
+  "a simple test" should "just work properly" in {
+    1 shouldBe 1
+  }
+}

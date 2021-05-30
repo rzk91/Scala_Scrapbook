@@ -1,12 +1,12 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="GPCaseClassTest" type="Application" factoryName="Application">
+  <configuration default="false" name="Python Process" type="Application" factoryName="Application">
     <option name="ALTERNATIVE_JRE_PATH" value="11" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-    <option name="MAIN_CLASS_NAME" value="scalatraining.CaseClasses" />
+    <option name="MAIN_CLASS_NAME" value="scrapbook.PythonProcess" />
     <module name="Scrapbook_Scala" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="scalatraining.objects.*" />
+        <option name="PATTERN" value="fpinscala.supportfiles.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
