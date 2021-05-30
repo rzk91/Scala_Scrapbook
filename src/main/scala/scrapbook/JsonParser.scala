@@ -42,16 +42,17 @@ object JsonParser extends LazyLogging {
     )
 
     val modifiedConfig = currentConfig.map {
-      case (str, vMap: Map[String, Any]) =>
+      case (str, vMap: Map[String, Any] @unchecked) =>
         val newValueOrder = valueOrder.filter(vMap.contains)
         str -> ListMap(newValueOrder.zip(newValueOrder.map(vMap)): _*)
+      case (str, vMap) => str -> vMap
     }
 
     val incompleteConfig = modifiedConfig.filter { case (k, _) => k.endsWith("2") }
 
     val expandedConfig = (3 to 10).flatMap { n =>
       incompleteConfig.map {
-        case (str, v: Map[String, Any]) =>
+        case (str, v: Map[String, Any] @unchecked) =>
           str.replace("2", s"$n") -> v
             .transform {
               case (inner_str, inner_v) =>
@@ -61,6 +62,7 @@ object JsonParser extends LazyLogging {
                   inner_v
                 }
             }
+        case (str, v) => str -> v
       }
     }
 

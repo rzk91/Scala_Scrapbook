@@ -2,20 +2,31 @@ name := "Scala_Scrapbook"
 
 version := "0.1"
 
-ThisBuild / scalaVersion := "2.12.10"
+val _scalaVersion = "2.12.10"
 
-val jacksonVersion = "2.10.2"
+ThisBuild / scalaVersion        := _scalaVersion
+Global / concurrentRestrictions += Tags.limit(Tags.Test, 1)
 
 resolvers += Resolver.mavenCentral
 
-libraryDependencies ++= Seq(
+lazy val root = (project in file(".")).settings(libraryDependencies ++= normalDependencies ++ testDependencies)
+
+val jacksonVersion = "2.10.2"
+
+val normalDependencies = Seq(
   "org.apache.poi"               % "poi"                   % "4.1.0",
   "org.apache.poi"               % "poi-ooxml"             % "4.1.0",
-  "org.scala-lang"               % "scala-reflect"         % scalaVersion.value,
+  "org.scala-lang"               % "scala-reflect"         % _scalaVersion,
   "com.typesafe.scala-logging"   %% "scala-logging"        % "3.9.2",
   "org.slf4j"                    % "slf4j-log4j12"         % "1.7.25",
   "com.fasterxml.jackson.core"   % "jackson-databind"      % jacksonVersion,
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion
+)
+
+val testDependencies = Seq(
+  "org.scalatest"          %% "scalatest" % "3.0.5"  % "test",
+  "org.scalamock"          %% "scalamock" % "4.1.0"  % "test",
+  "com.github.tomakehurst" % "wiremock"   % "2.20.0" % "test"
 )
 
 // make run command include the provided dependencies

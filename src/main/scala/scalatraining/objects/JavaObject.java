@@ -1,8 +1,8 @@
-package gptraining;
+package scalatraining.objects;
 
 import java.util.Objects;
 
-public class Test {
+public class JavaObject {
 
     public static void main(String[] args) {
 

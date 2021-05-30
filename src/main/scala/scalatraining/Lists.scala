@@ -1,6 +1,6 @@
-package gptraining
+package scalatraining
 
-object ListTest {
+object Lists {
 
   def main(args: Array[String]): Unit = {
 

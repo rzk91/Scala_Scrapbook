@@ -1,6 +1,8 @@
-package gptraining
+package scalatraining
 
-object CaseClassTest {
+import scalatraining.objects.{PersonJava, PersonScala2}
+
+object CaseClasses {
 
   def main(args: Array[String]): Unit = {
 

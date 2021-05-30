@@ -1,6 +1,8 @@
-package gptraining
+package scalatraining
 
-object PatternMatchingTest {
+import scalatraining.objects.PersonScala
+
+object PatternMatching {
 
   def main(args: Array[String]): Unit = {
 

@@ -1,4 +1,4 @@
-package gptraining;
+package scalatraining.objects;
 
 public class PersonJava {
 

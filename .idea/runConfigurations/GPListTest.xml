@@ -2,11 +2,11 @@
   <configuration default="false" name="GPListTest" type="Application" factoryName="Application">
     <option name="ALTERNATIVE_JRE_PATH" value="11" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-    <option name="MAIN_CLASS_NAME" value="gptraining.ListTest" />
+    <option name="MAIN_CLASS_NAME" value="scalatraining.Lists" />
     <module name="scala_scrapbook" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="gptraining.*" />
+        <option name="PATTERN" value="scalatraining.objects.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

@@ -558,12 +558,60 @@ object TestCode {
 //        .toMap
 //    )
 
-    val m = Map(1 -> 2, 2 -> 4, 3 -> 6, 4 -> 7)
-    val l = List(CaseClass(1, 2, 3), CaseClass(2, 3, 4), CaseClass(4, 5, 6))
+//    val m = Map(1 -> 2, 2 -> 4, 3 -> 6, 4 -> 7)
+//    val l = List(CaseClass(1, 2, 3), CaseClass(2, 3, 4), CaseClass(4, 5, 6))
+//
+////    println(m.updated(4, 8))
+//
+//    println(l.head.sort(true))
 
-//    println(m.updated(4, 8))
+//    val s = Set(1, 2, 3, 4)
+//
+//    println(s(1))
+//    println(s(5))
 
-    println(l.head.sort(true))
+//    val x = 3.24564d
+//
+//    def roundTo(x: Double)(n: Int): Double = {
+//      val m = math.pow(10, n)
+//      math.round(x * m) / m
+//    }
+//
+//    def truncateTo(x: Double)(n: Int): Double = {
+//      val m = math.pow(10, n)
+//      math.floor(x * m) / m
+//    }
+//
+//    println(truncateTo(x)(2))
+//    println(roundTo(x)(2))
+//
+//    println(math.ulp(x))
+
+//    val m = new java.util.HashMap[String, Long](java.util.Map.of("1", 2L, "2", 4L, "3", 6L, "4", 8L))
+//
+//    val v = m.get(5)
+//    println(v)
+//    val d = v - 10
+//    if (d > 0L) {
+//      println("Late")
+//    } else {
+//      println("Not late")
+//    }
+
+//    val x = 10f
+//    val y = 10.0
+//
+//    println(math.ulp(x))
+//    println(math.ulp(y))
+
+    val x: Option[Int] = None
+    val l = List(1, 2, 3, 4, 5)
+
+    // Runtime match error! Guard is applied to entire pattern, not just latter half
+    (x, l) match {
+      case (None, _) | (_, _) if l.lengthCompare(4) < 0 => println(l)
+      case (Some(x), l)                                 => println(x, l)
+    }
 
   }
 

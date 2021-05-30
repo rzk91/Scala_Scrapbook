@@ -1,6 +1,6 @@
-package gptraining
+package scalatraining
 
-object OptionTest {
+object Options {
 
   def main(args: Array[String]): Unit = {
 
