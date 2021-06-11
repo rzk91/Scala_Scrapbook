@@ -1,10 +1,8 @@
 package scrapbook.util
 
-import com.typesafe.scalalogging.LazyLogging
-import org.scalatest.BeforeAndAfterEach
-import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.{BeforeAndAfterEach, Suite}
 
-trait BasicTestSpec extends AnyFlatSpec with BeforeAndAfterEach with LazyLogging {
+trait BasicTestSpec extends BareBonesTestSpec with Suite with BeforeAndAfterEach with TestHelper {
 
   protected def beforeEachTest(): Unit = {}
   protected def afterEachTest(): Unit = {}
@@ -12,12 +10,12 @@ trait BasicTestSpec extends AnyFlatSpec with BeforeAndAfterEach with LazyLogging
   final override protected def beforeEach(): Unit = {
     beforeEachTest()
     logger.warn("Now running `beforeEach` inside BasicTestSpec...")
-    super.beforeEach
+    super.beforeEach()
   }
 
   final override protected def afterEach(): Unit = {
-    afterEachTest()
-    logger.warn("Now running `afterEach` inside BasicTestSpec...")
     super.afterEach()
+    logger.warn("Now running `afterEach` inside BasicTestSpec...")
+    afterEachTest()
   }
 }

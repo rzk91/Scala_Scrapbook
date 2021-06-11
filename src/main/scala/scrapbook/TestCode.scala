@@ -604,14 +604,39 @@ object TestCode {
 //    println(math.ulp(x))
 //    println(math.ulp(y))
 
-    val x: Option[Int] = None
-    val l = List(1, 2, 3, 4, 5)
+//    val x: Option[Int] = None
+//    val l = List(1, 2, 3, 4, 5)
+//
+//    // Runtime match error! Guard is applied to entire pattern, not just latter half
+//    (x, l) match {
+//      case (None, _) | (_, _) if l.lengthCompare(4) < 0 => println(l)
+//      case (Some(x), l)                                 => println(x, l)
+//    }
 
-    // Runtime match error! Guard is applied to entire pattern, not just latter half
-    (x, l) match {
-      case (None, _) | (_, _) if l.lengthCompare(4) < 0 => println(l)
-      case (Some(x), l)                                 => println(x, l)
-    }
+//    val t = 1500L
+//    val i = Instant.ofEpochMilli(t).atZone(ZoneOffset.UTC)
+
+//    println(i)
+//    println(i.plusDays(2))
+//    println(i.truncatedTo(ChronoUnit.DAYS).plusDays(2).getDayOfMonth)
+
+//    object Something {
+//      val s = "something"
+//    }
+//
+//    val s = "something"
+//
+//    println {
+//      s match {
+//        case Something.s => s"$s " * 4
+//        case _           => s
+//      }
+//    }
+
+    val tz = "Europe/Berlin"
+
+    println(ZoneId.of(tz))
+    println(ZoneId.of(tz).getId)
 
   }
 

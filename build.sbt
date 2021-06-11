@@ -23,11 +23,7 @@ val normalDependencies = Seq(
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion
 )
 
-val testDependencies = Seq(
-  "org.scalatest"          %% "scalatest" % "3.2.9"  % "test",
-  "org.scalamock"          %% "scalamock" % "4.1.0"  % "test",
-  "com.github.tomakehurst" % "wiremock"   % "2.20.0" % "test"
-)
+val testDependencies = Seq("org.scalatest" %% "scalatest" % "3.2.9" % "test")
 
 // make run command include the provided dependencies
 Compile / run := Defaults
