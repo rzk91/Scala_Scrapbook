@@ -613,13 +613,6 @@ object TestCode {
 //      case (Some(x), l)                                 => println(x, l)
 //    }
 
-//    val t = 1500L
-//    val i = Instant.ofEpochMilli(t).atZone(ZoneOffset.UTC)
-
-//    println(i)
-//    println(i.plusDays(2))
-//    println(i.truncatedTo(ChronoUnit.DAYS).plusDays(2).getDayOfMonth)
-
 //    object Something {
 //      val s = "something"
 //    }
@@ -633,10 +626,71 @@ object TestCode {
 //      }
 //    }
 
-    val tz = "Europe/Berlin"
+//    val t = 1623189600000L
+//    val i = Instant.ofEpochMilli(t).atZone(ZoneOffset.UTC)
+//
+//    println(i)
+//    println(i.plusDays(-2))
+//    println(i.truncatedTo(ChronoUnit.DAYS).plusDays(-2).getDayOfMonth)
+//
+//    println(i.plusMonths(-2))
+//    println(i.truncatedTo(ChronoUnit.DAYS).plusMonths(-2).getDayOfMonth)
 
-    println(ZoneId.of(tz))
-    println(ZoneId.of(tz).getId)
+//    val bot1 = "kba-sheetfed-uc1"
+//    val bot2 = "kba-digitalweb-uc13"
+//    val bot3 = "kba-bns-uc02"
+//
+//    println(useCaseId(bot1))
+//    println(useCaseId(bot2))
+//    println(useCaseId(bot3))
+
+//    val regex = """^([A-Za-z_]*sensor(\d+))$""".r
+//
+//    val s = "machine_status_sensor1"
+//
+//    println(s match {
+//      case regex(str, i) => (str, i.toInt)
+//      case _             => (s, "hmmmm...")
+//    })
+
+//    val map = new java.util.HashMap[String, Int](Map("a" -> 1, "b" -> 2, "c" -> 3).asJava)
+//
+//    def x: Int = map.get("d")
+//    val option = Option(x)
+//    println(map)
+//    println(option)
+//
+//    map.put("d", 4)
+//    println(map)
+//    println(option)
+//    print(x)
+
+//    val occs = IndexedSeq[(Long, Long)]((10, 20), (25, 30), (40, 42), (50, 60))
+//    val zone = ZoneId.of("Europe/Berlin")
+//
+//    println(findingDescription(occs, zone))
+
+//    trait A {
+//      def greet: String
+//    }
+//    trait B extends A {
+//      def greet: String = "hello there!"
+//    }
+//    trait C extends A with B {
+//      override def greet: String = s"${super.greet.replace("!", "")}, everyone!!"
+//    }
+//
+//    println(new C {}.greet)
+
+//    val x: Int = 1000
+//    println(math.ulp(x))
+//    println(math.random() * math.ulp(x))
+//
+//    println((x * 1.5).round.toInt)
+
+    val l = List(1)
+
+    println(l.init)
 
   }
 
@@ -658,6 +712,32 @@ object TestCode {
       (values.take(numValues): @unchecked) match {
         case v1 :: v2 :: v3 :: Nil => new CaseClass(v1, v2, v3)
       }
+    }
+  }
+
+  private def findingDescription(occurrences: IndexedSeq[(Long, Long)], zone: ZoneId): String = {
+    val occs = occurrences.map {
+      case (start, end) =>
+        s"\n start = ${start.asString(zone)}, end = ${end.asString(zone)}".replaceAll("\\[[A-Za-z/]+]", "")
+    }
+    s"""Finding description here.
+       | ${occurrences.length} finding occurrence(s) [${zone.getId}]:
+       | $occs""".stripMargin.replace("Vector(", "").replaceAll("([0Z])\\)", "$1")
+  }
+
+  implicit class TimeOps(val time: Long) extends AnyVal {
+    def asString(zone: ZoneId): String = Instant.ofEpochMilli(time).atZone(zone).toString
+  }
+
+  private def useCaseId(bot: String): String = {
+    val botRegex = """^[A-Za-z]+-([A-Za-z]+)-uc(\d+)$""".r
+    bot match {
+      case botRegex(bu, ucNumber) =>
+        (bu match {
+          case "sheetfed"   => "sf-uc"
+          case "digitalweb" => "dw-uc"
+          case _            => s"$bu-uc"
+        }) + f"${ucNumber.toInt}%03d"
     }
   }
 
