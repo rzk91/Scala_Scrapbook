@@ -15,7 +15,7 @@ object CaseClasses {
 
     val person2Scala = personScala.copy("Alice")
 
-    println(personScala.senior)
+    println(person2Scala)
 
   }
 }

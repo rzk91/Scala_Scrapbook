@@ -1,19 +1,13 @@
 package scrapbook
 
-import java.text.SimpleDateFormat
-import java.time.temporal.ChronoUnit
-import java.time.{Instant, LocalDateTime, ZoneId, ZoneOffset, ZonedDateTime}
 import fpinscala._
 
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import java.time.temporal.ChronoUnit
+import java.time.{Instant, ZoneId, ZoneOffset, ZonedDateTime}
 import scala.annotation.tailrec
-import scala.collection.mutable
-import scala.io.StdIn.readInt
-import scala.reflect.ClassTag
-import scala.util.{Success, Try}
 import scala.collection.JavaConverters._
-import scala.util.control.NonFatal
-import scala.util.matching.Regex
+import scala.reflect.ClassTag
 
 object TestCode {
 
@@ -688,9 +682,18 @@ object TestCode {
 //
 //    println((x * 1.5).round.toInt)
 
-    val l = List(1)
+//    val l = List(1)
+//
+//    println(l.init)
 
-    println(l.init)
+    val rgx = """^([A-Za-z0-9]+_\d+_csv)$""".r
+
+    val l = Map("Something_42_csv" -> 1, "Nothing_1" -> 2, "Nothing_at_all" -> 3, "Works_4_csv" -> 4)
+
+    println(l.map {
+      case (rgx(_), v) => s"$v is good"
+      case (_, v)      => s"$v is not good"
+    })
 
   }
 

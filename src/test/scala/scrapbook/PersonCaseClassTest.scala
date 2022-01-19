@@ -6,11 +6,17 @@ import scrapbook.util.BasicTestSpec
 
 class PersonCaseClassTest extends AnyFlatSpec with BasicTestSpec with Matchers {
 
-  override protected def beforeEachTest(): Unit =
-    logger.error("Now running `beforeEach` inside main test class...")
+  var _something = 1
 
-  override protected def afterEachTest(): Unit =
+  override protected def beforeEachTest(): Unit = {
+    logger.error("Now running `beforeEach` inside main test class...")
+    _something += 1
+  }
+
+  override protected def afterEachTest(): Unit = {
     logger.error("Now running `afterEach` inside main test class...")
+    println(s"something = ${_something}")
+  }
 
   "a simple test" should "just work properly" in {
     1 should be(1)

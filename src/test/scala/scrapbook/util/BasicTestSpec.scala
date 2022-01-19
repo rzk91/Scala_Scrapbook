@@ -1,8 +1,9 @@
 package scrapbook.util
 
+import com.typesafe.scalalogging.LazyLogging
 import org.scalatest.{BeforeAndAfterEach, Suite}
 
-trait BasicTestSpec extends BareBonesTestSpec with Suite with BeforeAndAfterEach with TestHelper {
+trait BasicTestSpec extends BareBonesTestSpec with Suite with BeforeAndAfterEach with TestHelper with LazyLogging {
 
   protected def beforeEachTest(): Unit = {}
   protected def afterEachTest(): Unit = {}
