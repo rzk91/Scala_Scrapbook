@@ -9,29 +9,28 @@ object TestParser {
   val path: String =
     "C:\\Users\\werm007\\Documents\\Work\\Customers\\Pfeiffer\\New_Data\\test"
 
-  def main(args: Array[String]): Unit = {
-    println()
-  }
+  def main(args: Array[String]): Unit =
+    getFileList(path).foreach(println)
 
-  private def getListOfFiles(path: String): Vector[String] = {
-    val listDir = new File(path).listFiles.toVector
+  private def getListOfFiles(path: String): IndexedSeq[String] = {
+    val listDir = new File(path).listFiles.toIndexedSeq
     listDir.withFilter(isCsvFile).map(_.getAbsolutePath) ++
-      listDir
-        .withFilter(_.isDirectory)
-        .flatMap(d => getListOfFiles(d.getAbsolutePath))
+    listDir
+      .withFilter(_.isDirectory)
+      .flatMap(d => getListOfFiles(d.getAbsolutePath))
   }
 
-  private def getListOfFiles2(path: String): Vector[String] = {
+  private def getListOfFiles2(path: String): IndexedSeq[String] = {
     val file = new File(path)
-    getFileStream(file).withFilter(isCsvFile).map(_.getAbsolutePath).toVector
+    getFileStream(file).withFilter(isCsvFile).map(_.getAbsolutePath).toIndexedSeq
   }
 
   private def getFileStream(file: File): Stream[File] =
     file #:: (if (file.isDirectory) {
-      Option(file.listFiles).toStream.flatten.flatMap(getFileStream)
-    } else {
-      Stream.empty
-    })
+                Option(file.listFiles).toStream.flatten.flatMap(getFileStream)
+              } else {
+                Stream.empty
+              })
 
   private def getFileList(path: String): List[String] = {
     @tailrec

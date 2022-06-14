@@ -686,14 +686,20 @@ object TestCode {
 //
 //    println(l.init)
 
-    val rgx = """^([A-Za-z0-9]+_\d+_csv)$""".r
+//    val rgx = """^([A-Za-z0-9]+_\d+_csv)$""".r
+//
+//    val l = Map("Something_42_csv" -> 1, "Nothing_1" -> 2, "Nothing_at_all" -> 3, "Works_4_csv" -> 4)
+//
+//    println(l.map {
+//      case (rgx(_), v) => s"$v is good"
+//      case (_, v)      => s"$v is not good"
+//    })
 
-    val l = Map("Something_42_csv" -> 1, "Nothing_1" -> 2, "Nothing_at_all" -> 3, "Works_4_csv" -> 4)
+    val finalTrait = new FinalTrait
 
-    println(l.map {
-      case (rgx(_), v) => s"$v is good"
-      case (_, v)      => s"$v is not good"
-    })
+    println(finalTrait.intermediateMethod)
+    println(finalTrait.extendedBasicMethod)
+    println(finalTrait.finalMethod)
 
   }
 
@@ -715,6 +721,14 @@ object TestCode {
       (values.take(numValues): @unchecked) match {
         case v1 :: v2 :: v3 :: Nil => new CaseClass(v1, v2, v3)
       }
+    }
+  }
+
+  class FinalTrait extends IntermediateTrait with ExtendedBasicTrait {
+
+    def finalMethod: String = {
+      basicVar += 1
+      "Final " + extendedBasicMethod
     }
   }
 
