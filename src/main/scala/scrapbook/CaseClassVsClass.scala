@@ -9,7 +9,7 @@ object CaseClassVsClass {
   object AnimalClass {
 
     def unapply(animal: AnimalClass): Option[(Int, String)] =
-      if (animal.age > 0) Some(animal.age, animal.name) else None
+      if (animal.age > 0) Some((animal.age, animal.name)) else None
 
     def apply(age: Int, name: String): AnimalClass = new AnimalClass(age, name)
   }
