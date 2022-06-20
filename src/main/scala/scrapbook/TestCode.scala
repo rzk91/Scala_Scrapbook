@@ -703,17 +703,21 @@ object TestCode {
 //    println(finalTrait.extendedBasicMethod)
 //    println(finalTrait.finalMethod)
 
-    val m = Map("a" -> 1, "b" -> 2, "c" -> 3)
-    val l = List(
-      PersonScala2("Bob", 20, Some(77.0)),
-      PersonScala2("Alice", 24, Some(65.2)),
-      PersonScala2("Charlie", 25, Some(72.6))
-    )
+    // val m = Map("a" -> 1, "b" -> 2, "c" -> 3)
+    // val l = List(
+    //   PersonScala2("Bob", 20, Some(77.0)),
+    //   PersonScala2("Alice", 24, Some(65.2)),
+    //   PersonScala2("Charlie", 25, Some(72.6))
+    // )
 
-    println(
-      s"Average age of ${l.map { case PersonScala2(name, _, Some(weight)) => (name, weight) }} = " +
-      s"${l.averageBy(_.weight.get)}"
-    )
+    // println(
+    //   s"Average age of ${l.map { case PersonScala2(name, _, Some(weight)) => (name, weight) }} = " +
+    //   s"${l.averageBy(_.weight.get)}"
+    // )
+
+    val x = 10
+
+    val m = Map("a" -> 1, "b" -> 2)
 
   }
 
