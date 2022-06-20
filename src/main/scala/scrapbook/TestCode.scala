@@ -717,8 +717,14 @@ object TestCode {
 
     val x = 10
 
-    val m = Map("a" -> 1, "b" -> 2)
+    val m = Map("a" -> 1, "b" -> 2, "c" -> 3, "d" -> 4)
 
+    m.flatMap {
+      case (k, v) if k == "a" => Some(v * 2)
+      case (k, v) if k == "b" || k == "c" => Some(v / 3.0)
+      case _ => None
+    }
+    .foreach(println)
   }
 
   case class CaseClass(v1: Double, v2: Double, v3: Double) {
